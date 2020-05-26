@@ -1,7 +1,7 @@
 module.exports = {
-    HOST: '',
-    USER: 'admin',
-    PASSWORD: 'xkfhvls4',
-    DB: 'react-db',
-    dialect: 'mysql',
-}
+    HOST: "react-db.c0mhmh2psufb.ap-northeast-2.rds.amazonaws.com",
+    USER: "admin",
+    PASSWORD: "xkfhvls4",
+    DB: "weather-react",
+    dialect: "mysql",
+};
