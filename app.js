@@ -9,7 +9,7 @@ var indexRouter = require("./routes/index");
 var sequelize = require('./models/index').sequelize;
 
 var app = express();
-var cors = require('cors');
+app.use(cors());
 
 sequelize.sync();
 
