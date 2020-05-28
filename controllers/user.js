@@ -23,6 +23,24 @@ exports.login = async (req, res) => {
     catch(err) {
         await transaction.rollback();
     }
-
-    
 };
+
+exports.join = async (req, res) => {
+    
+    let data = req.body;
+    let transaction = null;
+
+    await User.findOrCreate({
+        defaults: {
+            pw: data.pw,
+            name: data.name,
+            gender: data.gender,
+            phone: data.phone
+        },
+        where: {
+            id: data.email
+        }
+    }).spread((user, created) => {
+        return res.json(created);
+    });
+}

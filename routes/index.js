@@ -1,10 +1,10 @@
-var express = require("express");
-var router = express.Router();
+let express = require("express");
+let router = express.Router();
 
-var userRouter = require("./users");
-var loginRouter = require("./login");
+let loginRouter = require("./login");
+let joinRouter = require("./join");
 
-router.use("/users", userRouter);
 router.use("/login", loginRouter);
+router.use("/join", joinRouter);
 
 module.exports = router;
