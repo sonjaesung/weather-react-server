@@ -3,11 +3,14 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var cors = require('cors');
 
 var indexRouter = require("./routes/index");
 var sequelize = require('./models/index').sequelize;
 
 var app = express();
+var cors = require('cors');
+
 sequelize.sync();
 
 app.use(logger("dev"));
