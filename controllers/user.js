@@ -1,38 +1,53 @@
 const db = require('../models');
+const crypto = require('crypto');
+
 const User = db.User;
+
+let key = 'salt';
 
 exports.login = async (req, res) => {
     let data = req.body;
-    let transaction = null;
 
-    try{
-        transaction = await User.sequelize.transaction();
-        let user = await User.findOne({
-            where: {
-                id: data.email, 
-                pw: data.pw
-            }
-        }, {
-            transaction
-        });
-
-        await transaction.commit();
+    let user = await User.findOne({
+        where: {
+            id: data.email, 
+        }
+    });
+    
+    if(user !== null)
+    {
+        //암호화 해제
+        var decipher = crypto.createDecipher('aes192', key);
+        decipher.update(user.dataValues.pw, 'base64', 'utf8');
+        var decipheredOutput = decipher.final('utf8');
         
-        return res.json(user);
+        if(decipheredOutput === data.pw)
+        {
+            return res.json(user);
+        }
+        else
+        {
+            return res.json(null);
+        }
     }
-    catch(err) {
-        await transaction.rollback();
+    else
+    {
+        return res.json(user);
     }
 };
 
 exports.join = async (req, res) => {
     
     let data = req.body;
-    let transaction = null;
+
+    //암호화
+    var cipher = crypto.createCipher('aes192', key);
+    cipher.update(data.pw, 'utf8', 'base64');
+    var cipheredOutput = cipher.final('base64');
 
     await User.findOrCreate({
         defaults: {
-            pw: data.pw,
+            pw: cipheredOutput,
             name: data.name,
             gender: data.gender,
             phone: data.phone
