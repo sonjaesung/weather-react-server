@@ -34,7 +34,6 @@ exports.login = async (req, res) => {
         
         if(decipheredOutput === data.pw)
         {
-            res.cookie("user", token);
             return res.json({
                 token: token,
                 user: user
