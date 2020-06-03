@@ -1,5 +1,7 @@
 const db = require('../models');
 const crypto = require('crypto');
+let jwt = require("jsonwebtoken");
+let secretObj = require("../config/jwt");
 
 const User = db.User;
 
@@ -7,6 +9,15 @@ let key = 'salt';
 
 exports.login = async (req, res) => {
     let data = req.body;
+
+    // default : HMAC SHA256
+  let token = jwt.sign({
+        email: data.email   // 토큰의 내용(payload)
+    },
+    secretObj.secret ,    // 비밀 키
+    {
+        expiresIn: '5m'    // 유효 시간은 5분
+    });
 
     let user = await User.findOne({
         where: {
@@ -23,7 +34,11 @@ exports.login = async (req, res) => {
         
         if(decipheredOutput === data.pw)
         {
-            return res.json(user);
+            res.cookie("user", token);
+            return res.json({
+                token: token,
+                user: user
+            });
         }
         else
         {
