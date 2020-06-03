@@ -11,7 +11,7 @@ exports.login = async (req, res) => {
     let data = req.body;
 
     // default : HMAC SHA256
-  let token = jwt.sign({
+    let token = jwt.sign({
         email: data.email   // 토큰의 내용(payload)
     },
     secretObj.secret ,    // 비밀 키
@@ -34,6 +34,7 @@ exports.login = async (req, res) => {
         
         if(decipheredOutput === data.pw)
         {
+            res.cookie('user', token);
             return res.json({
                 token: token,
                 user: user
