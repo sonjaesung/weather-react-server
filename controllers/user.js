@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
     },
     secretObj.secret ,    // 비밀 키
     {
-        expiresIn: '5m'    // 유효 시간은 5분
+        expiresIn: '1h'    // 유효 시간은 5분
     });
 
     let user = await User.findOne({
