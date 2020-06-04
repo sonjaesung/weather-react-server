@@ -9,21 +9,6 @@ let key = 'salt';
 
 exports.login = async (req, res) => {
     let data = req.body;
-
-    // default : HMAC SHA256
-    let token = jwt.sign({
-        email: data.email   // 토큰의 내용(payload)
-    },
-    secretObj.secret ,    // 비밀 키
-    {
-        expiresIn: '1h'    // 유효 시간은 5분
-    });
-
-    let user = await User.findOne({
-        where: {
-            id: data.email, 
-        }
-    });
     
     if(user !== null)
     {
@@ -34,6 +19,22 @@ exports.login = async (req, res) => {
         
         if(decipheredOutput === data.pw)
         {
+            let user = await User.findOne({
+                where: {
+                    id: data.email, 
+                }
+            });
+
+            // default : HMAC SHA256
+            let token = jwt.sign({
+                userSeq: user.seq,
+                email: data.email   // 토큰의 내용(payload)
+            },
+            secretObj.secret ,    // 비밀 키
+            {
+                expiresIn: '1h'    // 유효 시간은 5분
+            });
+
             res.cookie('user', token);
             return res.json({
                 token: token,
