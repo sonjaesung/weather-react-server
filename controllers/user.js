@@ -9,7 +9,7 @@ let key = 'salt';
 
 exports.login = async (req, res) => {
     let data = req.body;
-    
+    return res.json('ok');
     if(user !== null)
     {
         //암호화 해제
