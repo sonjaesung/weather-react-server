@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
             res.locals.seq = decoded.userSeq;
             next();
         } else {
-            res.status(401).json({ error: 'unauthorized' });
+            res.status(401).json({ error: 'unauthorized' + req.cookies.user });
         }
 
     } catch (err) {
