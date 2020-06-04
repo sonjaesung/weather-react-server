@@ -5,7 +5,7 @@ let secretObj = require("../config/jwt");
 const verifyToken = (req, res, next) => {
     try {
         const clientToken = req.cookies.user;
-        const decoded = jwt.verify(clientToken, secretObj);
+        const decoded = jwt.verify(clientToken, secretObj.secret);
 
         if (decoded) {
             res.locals.id = decoded.email;
