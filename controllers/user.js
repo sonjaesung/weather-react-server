@@ -9,7 +9,13 @@ let key = 'salt';
 
 exports.login = async (req, res) => {
     let data = req.body;
-    return res.json('ok');
+    
+    let user = await User.findOne({
+        where: {
+            id: data.email, 
+        }
+    });
+
     if(user !== null)
     {
         //암호화 해제
@@ -19,16 +25,10 @@ exports.login = async (req, res) => {
         
         if(decipheredOutput === data.pw)
         {
-            let user = await User.findOne({
-                where: {
-                    id: data.email, 
-                }
-            });
-
             // default : HMAC SHA256
             let token = jwt.sign({
                 userSeq: user.seq,
-                email: data.email   // 토큰의 내용(payload)
+                email: user.id   // 토큰의 내용(payload)
             },
             secretObj.secret ,    // 비밀 키
             {
