@@ -3,7 +3,7 @@ const TodayEnglish = db.TodayEnglish;
 
 exports.get = async (req, res) => {
 
-    return res.json('ok');
+    return res.json(res.locals.id);
 }
 
 exports.add = async (req, res) => {
