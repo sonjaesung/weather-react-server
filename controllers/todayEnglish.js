@@ -1,12 +1,9 @@
 const db = require('../models');
-const crypto = require('crypto');
 const TodayEnglish = db.TodayEnglish;
 
 exports.get = async (req, res) => {
-    
-    console.log(res.locals);
 
-    return res.json('ok');
+    return res.json(res.locals);
 }
 
 exports.add = async (req, res) => {
