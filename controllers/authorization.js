@@ -8,7 +8,8 @@ const verifyToken = (req, res, next) => {
         const decoded = jwt.verify(clientToken, secretObj);
 
         if (decoded) {
-            res.locals.userId = decoded.email;
+            res.locals.id = decoded.email;
+            res.locals.seq = decoded.userSeq;
             next();
         } else {
             res.status(401).json({ error: 'unauthorized' });
