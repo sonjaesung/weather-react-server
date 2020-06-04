@@ -10,15 +10,15 @@ var sequelize = require('./models/index').sequelize;
 
 var app = express();
 
-/*
+
 const corsOptions = {
-    origin: 'http://localhost:3000', // 허락하고자 하는 요청 주소
+    origin: 'http://ec2-13-125-208-250.ap-northeast-2.compute.amazonaws.com:3000', // 허락하고자 하는 요청 주소
     credentials: true, // true로 하면 설정한 내용을 response 헤더에 추가 해줍니다.
 };
 
 app.use(cors(corsOptions));
-*/
-app.use(cors());
+
+//app.use(cors());
 
 sequelize.sync();
 
