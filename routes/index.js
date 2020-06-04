@@ -8,6 +8,6 @@ let auth = require('../controllers/authorization');
 
 router.use("/login", loginRouter);
 router.use("/join", joinRouter);
-router.use("/todayEnglish", auth.verifyToken, englishRouter);
+router.use("/todayEnglish", englishRouter);
 
 module.exports = router;
