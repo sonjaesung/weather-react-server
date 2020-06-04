@@ -8,7 +8,6 @@ const User = db.User;
 let key = 'salt';
 
 exports.login = async (req, res) => {
-    return res.json('ok');
     let data = req.body;
     
     if(user !== null)
