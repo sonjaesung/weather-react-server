@@ -5,6 +5,7 @@ let secretObj = require("../config/jwt");
 
 exports.get = async (req, res) => {
 
+    return res.json('ok');
     const clientToken = req.cookies.user;
     const decoded = await jwt.verify(clientToken, secretObj.secret);
 
