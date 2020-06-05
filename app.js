@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var cors = require('cors');
+var cookieParser = require('cookie-parser')
 
 var indexRouter = require("./routes/index");
 var sequelize = require('./models/index').sequelize;
@@ -16,6 +17,7 @@ const corsOptions = {
     credentials: true, // true로 하면 설정한 내용을 response 헤더에 추가 해줍니다.
 };
 
+app.use(cookieParser());
 app.use(cors(corsOptions));
 
 //app.use(cors());
