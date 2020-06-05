@@ -15,6 +15,7 @@ var app = express();
 const corsOptions = {
     origin: true, //'http://weather-client.s3-website.ap-northeast-2.amazonaws.com', //'http://localhost:3001', // 허락하고자 하는 요청 주소
     credentials: true, // true로 하면 설정한 내용을 response 헤더에 추가 해줍니다.
+    withCredentials: true,
 };
 
 app.use(cookieParser());
