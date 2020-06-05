@@ -1,11 +1,12 @@
 const db = require('../models');
 const TodayEnglish = db.TodayEnglish;
+const jwt = require('jsonwebtoken');
+let secretObj = require("../config/jwt");
 
 exports.get = async (req, res) => {
-    console.log(res.locals.id);
 
     const clientToken = req.cookies.user;
-    const decoded = jwt.verify(clientToken, secretObj.secret);
+    const decoded = await jwt.verify(clientToken, secretObj.secret);
 
     if (decoded) {
         res.locals.id = decoded.email;
