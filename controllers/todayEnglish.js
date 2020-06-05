@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 let secretObj = require("../config/jwt");
 
 exports.get = async (req, res) => {
-    return res.json(req.cookies.user);
+    return res.json(req.cookies);
     const clientToken = req.cookies.user;
     const decoded = await jwt.verify(clientToken, secretObj.secret);
     
