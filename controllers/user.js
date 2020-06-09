@@ -103,3 +103,39 @@ exports.findEmail = async (req, res) => {
         return res.json(user);
     }
 };
+
+exports.resetPw = async (req, res) => {
+    let data = req.body;
+    
+    let user = await User.findOne({
+        where: {
+            id: data.email, 
+            name: data.name
+        }
+    });
+
+    if(user !== null)
+    {
+        //암호화
+        var cipher = crypto.createCipher('aes192', key);
+        cipher.update(data.pw, 'utf8', 'base64');
+        var cipheredOutput = cipher.final('base64');
+
+        await User.update({
+            pw: cipheredOutput
+        }, {
+            where: {
+                seq: user.dataValues.seq
+            }
+        }).then(result => {
+            console.log(result);
+            res.json(result);
+        }).catch(err => {
+            console.error(err);
+        });
+    }
+    else
+    {
+        return res.json(user);
+    }
+};
