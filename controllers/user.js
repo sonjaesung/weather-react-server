@@ -79,3 +79,26 @@ exports.join = async (req, res) => {
         return res.json(created);
     });
 }
+
+exports.findEmail = async (req, res) => {
+    let data = req.body;
+    
+    let user = await User.findOne({
+        where: {
+            name: data.name, 
+            phone: data.phone,
+            gender: data.gender
+        }
+    });
+
+    if(user !== null)
+    {
+        return res.json(
+            user.email
+        );
+    }
+    else
+    {
+        return res.json(user);
+    }
+};
