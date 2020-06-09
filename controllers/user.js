@@ -8,7 +8,19 @@ const User = db.User;
 let key = 'salt';
 
 exports.get = async (req, res) => {
-    return res.json('ok');
+
+    let user = await User.findOne({
+        where: {
+            seq: res.locals.seq
+        }
+    });
+
+    if(user !== null)
+    {
+        return res.json(user.dataValues.name);
+    }else {
+        return res.json(null);
+    }
 }
 
 exports.login = async (req, res) => {
