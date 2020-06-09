@@ -83,6 +83,7 @@ exports.join = async (req, res) => {
 exports.findEmail = async (req, res) => {
     let data = req.body;
     
+    
     let user = await User.findOne({
         where: {
             name: data.name, 
@@ -94,7 +95,7 @@ exports.findEmail = async (req, res) => {
     if(user !== null)
     {
         return res.json(
-            user.email
+            user.dataValues.id
         );
     }
     else
