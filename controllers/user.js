@@ -46,10 +46,8 @@ exports.login = async (req, res) => {
                 userSeq: user.seq,
                 email: user.id   // 토큰의 내용(payload)
             },
-            secretObj.secret ,    // 비밀 키
-            {
-                expiresIn: '1h'    // 유효 시간은 5분
-            });
+            secretObj.secret,    // 비밀 키
+            );
 
             res.cookie('user', token);
             return res.json({
