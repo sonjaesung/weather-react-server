@@ -8,10 +8,10 @@ exports.get = async (req, res) => {
             where: {
                 userSeq: res.locals.seq
             },
-            order: ['createdAt', 'DESC']
+            order: [['createdAt', 'ASC']]
         }
     )
-
+        console.log(englishList);
     return res.json(englishList);
 }
 
