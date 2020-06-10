@@ -7,7 +7,8 @@ exports.get = async (req, res) => {
         {
             where: {
                 userSeq: res.locals.seq
-            }
+            },
+            order: 'createdAt desc'
         }
     )
 
