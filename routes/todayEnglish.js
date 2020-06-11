@@ -4,6 +4,6 @@ var englishController = require("../controllers/todayEnglish");
 var auth = require('../controllers/authorization');
 
 router.get("/", auth.verifyToken, englishController.get);
-router.post("/", auth.verifyToken, englishController.add);
+router.post("/",auth.verifyTokenPost, englishController.add);
 
 module.exports = router;

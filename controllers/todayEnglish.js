@@ -11,7 +11,7 @@ exports.get = async (req, res) => {
             order: [['createdAt', 'ASC']]
         }
     )
-        console.log(englishList);
+
     return res.json(englishList);
 }
 
@@ -19,6 +19,12 @@ exports.add = async (req, res) => {
 
     let data = req.body;
 
-    console.log(data);
-    return res.json('ok');
+    let englishAdd = await TodayEnglish.create({
+        userSeq: res.locals.seq,
+        content: data.content,
+        check: false,
+        delete: false
+    });
+
+    return res.json(englishAdd);
 }
