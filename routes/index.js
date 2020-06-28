@@ -15,6 +15,6 @@ router.use("/find-email", findEmailRouter);
 router.use("/reset-pw", resetPw);
 router.use("/todayEnglish", englishRouter);
 router.use("/weather", weatherRouter);
-router.use("/lottoRouter", lottoRouter);
+router.use("/lotto", lottoRouter);
 
 module.exports = router;
